@@ -14,4 +14,5 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
     List<Flight> findFlights(@Param("departureCity") String from, @Param("arrivalCity") String to,
                              @Param("dateOfDeparture") Date departureDate);
 
+
 }

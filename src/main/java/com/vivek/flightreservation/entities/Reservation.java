@@ -1,5 +1,7 @@
 package com.vivek.flightreservation.entities;
 
+import java.util.Optional;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 
@@ -11,7 +13,7 @@ public class Reservation extends AbstractEntity {
     @OneToOne
     private Passenger passenger;
     @OneToOne
-    private Flight flight;
+    private Optional<Flight> flight;
 
     public Boolean getCheckedIn() {
         return checkedIn;
@@ -37,12 +39,12 @@ public class Reservation extends AbstractEntity {
         this.passenger = passenger;
     }
 
-    public Flight getFlight() {
+    public Optional<Flight> getFlight() {
         return flight;
     }
 
-    public void setFlight(Flight flight) {
-        this.flight = flight;
+    public void setFlight(Optional<Flight> flight2) {
+        this.flight = flight2;
     }
 
 }

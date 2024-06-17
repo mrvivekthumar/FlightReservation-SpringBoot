@@ -23,10 +23,15 @@ public class FlightController {
                               @RequestParam("departureDate") @DateTimeFormat(pattern = "MM-dd-yyyy") Date departureDate,
                               ModelMap modelMap) {
 
-        List<Flight> flights = flightRepository.findFlights(from, to, departureDate);
-
-        modelMap.addAttribute("flights", flights);
-        return "displayFlights";
+        try {
+            List<Flight> flights = flightRepository.findFlights(from, to, departureDate);
+            modelMap.addAttribute("flights", flights);
+            return "displayFlights";
+        } catch (Exception e) {
+            modelMap.addAttribute("errorMessage", "An error occurred while searching for flights.");
+            e.printStackTrace();
+            return "errorPage"; // Make sure to create an appropriate error page
+        }
     }
 
 }
