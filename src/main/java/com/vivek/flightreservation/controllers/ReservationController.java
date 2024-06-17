@@ -1,6 +1,5 @@
 package com.vivek.flightreservation.controllers;
 
-import com.vivek.flightreservation.entities.Flight;
 import com.vivek.flightreservation.repos.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

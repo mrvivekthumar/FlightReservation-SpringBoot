@@ -1,8 +1,7 @@
 package com.vivek.flightreservation.repos;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.vivek.flightreservation.entities.Passenger;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PassengerRepository extends JpaRepository<Passenger, Long> {
 
