@@ -13,7 +13,6 @@ public class Reservation extends AbstractEntity {
 	@OneToOne
 	private Flight flight;
 
-
 	public Boolean getCheckedIn() {
 		return checkedIn;
 	}

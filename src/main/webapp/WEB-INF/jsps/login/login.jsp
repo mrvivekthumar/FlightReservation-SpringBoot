@@ -7,19 +7,21 @@
 <title>User Login</title>
 </head>
 <body>
-	<form action = "login" method = "post">
-		<h2>Login :</h2>
+	<h2>Login :</h2>
+
+	<form action="login" method="post">
 		<pre>
-Email : <input type="text" name="email">
+Email : <input type="text" name="email" />
 
-Password : <input type="password" name="password">
+Password : <input type="password" name="password" />
 
-<input type="submit" name="login">
-
+<input type="submit" name="login" />
 
 </pre>
 
 	</form>
+
+	${msg}
 
 </body>
 </html>

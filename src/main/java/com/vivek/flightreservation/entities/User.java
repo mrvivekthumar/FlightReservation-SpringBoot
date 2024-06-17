@@ -3,7 +3,6 @@ package com.vivek.flightreservation.entities;
 import jakarta.persistence.Entity;
 
 @Entity
-
 public class User extends AbstractEntity{
 
 	private String firstname;

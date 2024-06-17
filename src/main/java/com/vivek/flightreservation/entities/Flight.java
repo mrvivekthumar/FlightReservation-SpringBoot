@@ -3,24 +3,25 @@ package com.vivek.flightreservation.entities;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class Flight extends AbstractEntity{
 
-	private String flightnumber;
+	private String flightNumber;
 	private String operatingAirlines;
 	private String departureCity;
 	private String arrivalCity;
 	private Date dateOfDeparture;
 	private Timestamp estimatedDepartureTime;
 
-	public String getFlightnumber() {
-		return flightnumber;
+	public String getFlightNumber() {
+		return flightNumber;
 	}
 
-	public void setFlightnumber(String flightnumber) {
-		this.flightnumber = flightnumber;
+	public void setFlightNumber(String flightNumber) {
+		this.flightNumber = flightNumber;
 	}
 
 	public String getOperatingAirlines() {
