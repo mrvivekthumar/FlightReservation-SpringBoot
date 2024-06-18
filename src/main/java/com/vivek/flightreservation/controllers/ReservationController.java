@@ -2,7 +2,9 @@ package com.vivek.flightreservation.controllers;
 
 import com.vivek.flightreservation.dto.ReservationRequest;
 import com.vivek.flightreservation.entities.Flight;
+import com.vivek.flightreservation.entities.Reservation;
 import com.vivek.flightreservation.repos.FlightRepository;
+import com.vivek.flightreservation.services.ReservationService;
 
 import java.util.Optional;
 
@@ -18,6 +20,9 @@ public class ReservationController {
 
     @Autowired
     FlightRepository flightRepository;
+    
+    @Autowired
+    ReservationService reservationService;
 
     @RequestMapping("/showCompleteReservation")
     public String showCompleteReservation(@RequestParam("flightId") Long flightId, ModelMap modelMap) {
@@ -28,8 +33,10 @@ public class ReservationController {
     
     
     @RequestMapping(value ="/completeReservation", method = RequestMethod.POST)
-    public String completeReservation(ReservationRequest request) {
-    	return null;
+    public String completeReservation(ReservationRequest request,ModelMap modelMap) {
+    	Reservation reservation = reservationService.bookFlight(request);
+    	modelMap.addAttribute("msg", "REservation created successfully and the id id "+ reservation.getId());
+    	return "reservationConfirmation";
     }
     
     

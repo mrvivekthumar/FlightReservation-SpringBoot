@@ -3,6 +3,7 @@ package com.vivek.flightreservation.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.vivek.flightreservation.dto.ReservationRequest;
 import com.vivek.flightreservation.entities.Flight;
@@ -12,6 +13,7 @@ import com.vivek.flightreservation.repos.FlightRepository;
 import com.vivek.flightreservation.repos.PassengerRepository;
 import com.vivek.flightreservation.repos.ReservationRepository;
 
+@Service
 public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	FlightRepository flightRepository;
@@ -31,6 +33,13 @@ public class ReservationServiceImpl implements ReservationService {
 	 Long flightId = request.getFlightId();
 	 Optional<Flight> flight = flightRepository.findById(flightId);
 	 
+	 if (!flight.isPresent()) {
+         throw new RuntimeException("Flight not found with id: " + flightId);
+     }
+	 
+	 Flight flight1 = flight.get();
+
+	 
 	 Passenger passenger = new Passenger();
 	 passenger.setFirstName(request.getPassengerFirstName());
 	 passenger.setLastName(request.getPassengerLastName());
@@ -42,7 +51,8 @@ public class ReservationServiceImpl implements ReservationService {
 	 
 	 Reservation reservation = new Reservation();
 	 
-	 reservation.setFlight(flight);
+	 
+	 reservation.setFlight(flight1);
 	 reservation.setPassenger(savedPassenger);
 	 reservation.setCheckedIn(false);
 		

@@ -13,7 +13,7 @@ public class Reservation extends AbstractEntity {
     @OneToOne
     private Passenger passenger;
     @OneToOne
-    private Optional<Flight> flight;
+    private Flight flight;
 
     public Boolean getCheckedIn() {
         return checkedIn;
@@ -39,12 +39,12 @@ public class Reservation extends AbstractEntity {
         this.passenger = passenger;
     }
 
-    public Optional<Flight> getFlight() {
+    public Flight getFlight() {
         return flight;
     }
 
-    public void setFlight(Optional<Flight> flight2) {
-        this.flight = flight2;
-    }
+	public void setFlight(Flight flight) {
+		this.flight = flight;
+	}
 
 }
