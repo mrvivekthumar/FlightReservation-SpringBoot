@@ -20,7 +20,7 @@ public class ReservationController {
 
     @Autowired
     FlightRepository flightRepository;
-    
+
     @Autowired
     ReservationService reservationService;
 
@@ -30,14 +30,14 @@ public class ReservationController {
         modelMap.addAttribute("flight", flight);
         return "completeReservation";
     }
-    
-    
+
+
     @RequestMapping(value ="/completeReservation", method = RequestMethod.POST)
     public String completeReservation(ReservationRequest request,ModelMap modelMap) {
     	Reservation reservation = reservationService.bookFlight(request);
     	modelMap.addAttribute("msg", "REservation created successfully and the id id "+ reservation.getId());
     	return "reservationConfirmation";
     }
-    
-    
+
+
 }

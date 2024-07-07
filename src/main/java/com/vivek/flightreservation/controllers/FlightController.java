@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
@@ -18,15 +19,19 @@ public class FlightController {
     @Autowired
     FlightRepository flightRepository;
 
-    @RequestMapping("/findFlights")
+    @RequestMapping(value = "/findFlights",method = RequestMethod.POST)
     public String findFlights(@RequestParam("from") String from, @RequestParam("to") String to,
-                              @RequestParam("departureDate") @DateTimeFormat(pattern = "MM-dd-yyyy") Date departureDate,
-                              ModelMap modelMap) {
-
+                              @RequestParam("departureDate") @DateTimeFormat(pattern ="dd-MM-yyyy") Date departureDate,
+                              ModelMap modelMap) 
+    {
         try {
+            System.out.println("hii");
             List<Flight> flights = flightRepository.findFlights(from, to, departureDate);
             modelMap.addAttribute("flights", flights);
+            System.out.println("hii2");
+
             return "displayFlights";
+
         } catch (Exception e) {
             modelMap.addAttribute("errorMessage", "An error occurred while searching for flights.");
             e.printStackTrace();
