@@ -7,17 +7,18 @@ import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class AbstractEntity {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
+
+
 
 }

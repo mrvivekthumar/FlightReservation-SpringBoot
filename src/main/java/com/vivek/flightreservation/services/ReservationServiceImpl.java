@@ -41,8 +41,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 
 	 Passenger passenger = new Passenger();
-	 passenger.setFirstName(request.getPassengerFirstName());
-	 passenger.setLastName(request.getPassengerLastName());
+	 passenger.setFirstname(request.getPassengerFirstName());
+	 passenger.setLastname(request.getPassengerLastName());
 	 passenger.setEmail(request.getPassengerEmail());
 	 passenger.setPhone(request.getPassengerEmail());
 

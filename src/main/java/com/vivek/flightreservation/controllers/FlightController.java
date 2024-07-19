@@ -22,7 +22,7 @@ public class FlightController {
     @RequestMapping(value = "/findFlights",method = RequestMethod.POST)
     public String findFlights(@RequestParam("from") String from, @RequestParam("to") String to,
                               @RequestParam("departureDate") @DateTimeFormat(pattern ="dd-MM-yyyy") Date departureDate,
-                              ModelMap modelMap) 
+                              ModelMap modelMap)
     {
         try {
             System.out.println("hii");
