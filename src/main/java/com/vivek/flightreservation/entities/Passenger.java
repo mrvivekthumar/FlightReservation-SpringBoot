@@ -1,23 +1,22 @@
 package com.vivek.flightreservation.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class Passenger extends AbstractEntity {
-    @Column(name = "firstname")
+    
     private String firstname;
 
-    @Column(name = "lastname")
+    
     private String lastname;
 
-    @Column(name = "middlename")
+    
     private String middlename;
 
-    @Column(name = "email")
+    
     private String email;
 
-    @Column(name = "phone")
+    
     private String phone;
 
     public String getFirstname() {

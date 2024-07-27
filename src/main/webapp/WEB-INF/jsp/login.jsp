@@ -9,7 +9,7 @@
 <body>
 	<h2>Login :</h2>
 
-	<form action="findFlights" method="post">
+	<form action="login" method="post">
 		<pre>
 Email : <input type="text" name="email" />
 

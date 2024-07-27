@@ -4,17 +4,18 @@ import com.vivek.flightreservation.entities.Flight;
 import com.vivek.flightreservation.entities.User;
 import com.vivek.flightreservation.repos.FlightRepository;
 import com.vivek.flightreservation.repos.UserRepository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Date;
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -22,33 +23,62 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping("/registerUser")
-    public String showRegistrationPage() {
+    @GetMapping("/register")
+    public String registerForm() {
         return "registerUser";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String register(@ModelAttribute("user") User user) {
-        userRepository.save(user);
-        return "login";
-    }
-
-    @RequestMapping("/showLogin")
-    public String showLoginPage() {
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute("user") User user) {
+    	userRepository.save(user);
         return "login";
     }
     
-    @RequestMapping(value = "/findFlights", method = RequestMethod.POST)
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password,
-                        ModelMap modelMap) {
-        User user = userRepository.findByEmail(email);
-        if (user != null && user.getPassword().equals(password)) {
-            return "findFlights";
-        } else {
-            modelMap.addAttribute("msg", "username or password is incorrect, please try again later");
-        }
+    @GetMapping("/login")
+    public String loginForm() {
+    	return "login";
+    }
+    
+    @PostMapping("/login")
+    public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, ModelMap modelMap) {
+      User user = userRepository.findByEmail(email);
 
+      if (user != null && user.getPassword().equals(password)) {
+        return "findFlights";
+      } else {
+        modelMap.addAttribute("msg", "Invalid username or password. Please try again.");
+      }
+      return "login";
+    }
+    
+    
+    
+    @Autowired
+    FlightRepository flightRepository;
+    
+    @GetMapping("/findFlights")
+    public String findFlightsForm() {
+    	return "findFlights";
+    }
 
-        return "showLogin";
+    @PostMapping("/findFlights")
+    public String findFlights(@RequestParam("from") String from, @RequestParam("to") String to,
+                              @RequestParam("departureDate") String departureDate,
+                              ModelMap modelMap)
+    {
+            System.out.println("hii");
+            System.out.println(from + ", " + to + ", " + departureDate);
+            List<Flight> flights = flightRepository.findFlights(from, to, departureDate);
+            System.out.println(flights.toString());
+            
+            
+            modelMap.addAttribute("flights", flights);
+            System.out.println("hii2");
+            return "viewFlights";
+    }
+    
+    @GetMapping("/viewFlights")
+    public String viewFlightsForm() {
+    	return "viewFlights";
     }
 }

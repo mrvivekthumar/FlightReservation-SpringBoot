@@ -9,16 +9,14 @@ import jakarta.persistence.MappedSuperclass;
 public class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    public int getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 }

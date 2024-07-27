@@ -9,7 +9,7 @@
 
 <h2>Find Flights</h2>
 <body>
-	<form action="displayFlights" method="post">
+	<form action="findFlights" method="post">
 		<pre>
 From : <input type="text" name="from" />
 
@@ -17,7 +17,7 @@ To: <input type="text" name="to" />
 
 Departure Date: <input type="text" name="departureDate" />
 
-<input type="submit" value="search" />
+<input type="submit" value= "findFlights"/>
 
 </pre>
 	</form>
