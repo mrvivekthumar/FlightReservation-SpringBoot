@@ -1,25 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page import="com.vivek.flightreservation.entities.Flight" %>
+<%@ page import="java.util.List" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>View Flights</title>
+  <meta charset="UTF-8">
+  <title>View Flights</title>
 </head>
 <body>
-  <h2>View Flights :</h2>
-  <table>
-    <tr>
-      <th>Airlines</th>
-      <th>Departure City</th>
-      <th>Arrival City</th> 
-      <th>Departure Time</th>
-    </tr>
-    <c:forEach var="flight" items="${flights}"> <tr>
-        <td><c:out value="${flight.operatingAirlines}" /></td>  <td><c:out value="${flight.departureCity}" /></td>   <td><c:out value="${flight.arrivalCity}" /></td>     <td><c:out value="${flight.estimatedDepartureTime}" /></td> </tr>
-    </c:forEach>
-  </table>
+<h2>Available Flights</h2>
+<%
+  List<Flight> flights = (List<Flight>) request.getAttribute("flights");
+
+  if (flights != null && !flights.isEmpty()) {
+%>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Flight Number</th>
+    <th>Airline</th>
+    <th>Departure City</th>
+    <th>Arrival City</th>
+    <th>Estimeted Departure Time</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%
+    // Iterate through the list of flights and display each one
+    for (Flight flight : flights) {
+  %>
+  <tr>
+    <td><%= flight.getFlightNumber() %></td>
+    <td><%= flight.getOperatingAirlines() %></td>
+    <td><%= flight.getDepartureCity() %></td>
+    <td><%= flight.getArrivalCity() %></td>
+    <td><%= flight.getEstimatedDepartureTime() %></td>
+  </tr>
+  <%
+    }
+  %>
+  </tbody>
+</table>
+<%
+} else {
+%>
+<p>No flights found.</p>
+<%
+  }
+%>
 </body>
 </html>
