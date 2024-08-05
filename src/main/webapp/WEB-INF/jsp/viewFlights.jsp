@@ -17,7 +17,6 @@
 <table border="1">
   <thead>
   <tr>
-    <th>Flight Number</th>
     <th>Airline</th>
     <th>Departure City</th>
     <th>Arrival City</th>
@@ -30,11 +29,11 @@
     for (Flight flight : flights) {
   %>
   <tr>
-    <td><%= flight.getFlightNumber() %></td>
     <td><%= flight.getOperatingAirlines() %></td>
     <td><%= flight.getDepartureCity() %></td>
     <td><%= flight.getArrivalCity() %></td>
     <td><%= flight.getEstimatedDepartureTime() %></td>
+    <td><a href="showCompleteReservation?flightId=<%= flight.getId() %>">Select</a></td>
   </tr>
   <%
     }

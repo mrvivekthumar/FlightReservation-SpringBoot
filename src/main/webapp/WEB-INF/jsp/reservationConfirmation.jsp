@@ -1,12 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Reservation Confirmation : </title>
+    <meta charset="UTF-8">
+    <title>Reservation Confirmation</title>
 </head>
 <body>
-${msg}
+<%
+    String msg = (String) request.getAttribute("msg");
+    if (msg != null) {
+%>
+<%= msg %>
+<%
+} else {
+%>
+<p>No confirmation message available.</p>
+<%
+    }
+%>
 </body>
 </html>

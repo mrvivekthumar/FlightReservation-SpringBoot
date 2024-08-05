@@ -11,9 +11,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ReservationController {
@@ -24,18 +22,17 @@ public class ReservationController {
     @Autowired
     ReservationService reservationService;
 
-    @RequestMapping("/showCompleteReservation")
+    @GetMapping("/showCompleteReservation")
     public String showCompleteReservation(@RequestParam("flightId") Long flightId, ModelMap modelMap) {
         Optional<Flight> flight = flightRepository.findById(flightId);
         modelMap.addAttribute("flight", flight);
         return "completeReservation";
     }
 
-
-    @RequestMapping(value ="/completeReservation", method = RequestMethod.POST)
+    @PostMapping(value ="/completeReservation")
     public String completeReservation(ReservationRequest request,ModelMap modelMap) {
     	Reservation reservation = reservationService.bookFlight(request);
-    	modelMap.addAttribute("msg", "REservation created successfully and the id id "+ reservation.getId());
+    	modelMap.addAttribute("msg", "Reservation created successfully and the id "+ reservation.getId());
     	return "reservationConfirmation";
     }
 
