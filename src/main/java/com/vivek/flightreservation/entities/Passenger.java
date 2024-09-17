@@ -4,59 +4,61 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class Passenger extends AbstractEntity {
-    
-    private String firstname;
 
-    
-    private String lastname;
+	private String firstname;
 
-    
-    private String middlename;
+	private String lastname;
 
-    
-    private String email;
+	private String middlename;
 
-    
-    private String phone;
+	private String email;
 
-    public String getFirstname() {
-        return firstname;
-    }
+	private String phone;
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
+	public String getFirstname() {
+		return firstname;
+	}
 
-    public String getLastname() {
-        return lastname;
-    }
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+	public String getLastname() {
+		return lastname;
+	}
 
-    public String getMiddlename() {
-        return middlename;
-    }
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
 
-    public void setMiddlename(String middlename) {
-        this.middlename = middlename;
-    }
+	public String getMiddlename() {
+		return middlename;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setMiddlename(String middlename) {
+		this.middlename = middlename;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	@Override
+	public String toString() {
+		return "Passenger [firstname=" + firstname + ", lastname=" + lastname + ", middlename=" + middlename
+				+ ", email=" + email + ", phone=" + phone + "]";
+	}
 
 }

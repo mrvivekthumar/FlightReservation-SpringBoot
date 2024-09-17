@@ -8,6 +8,8 @@ import com.vivek.flightreservation.services.ReservationService;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,25 +18,33 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ReservationController {
 
-    @Autowired
-    FlightRepository flightRepository;
+	@Autowired
+	FlightRepository flightRepository;
 
-    @Autowired
-    ReservationService reservationService;
+	@Autowired
+	ReservationService reservationService;
 
-    @GetMapping("/showCompleteReservation")
-    public String showCompleteReservation(@RequestParam("flightId") Long flightId, ModelMap modelMap) {
-        Optional<Flight> flight = flightRepository.findById(flightId);
-        modelMap.addAttribute("flight", flight);
-        return "completeReservation";
-    }
+	private static final Logger LOGGER = LoggerFactory.getLogger(ReservationController.class);
 
-    @PostMapping(value ="/completeReservation")
-    public String completeReservation(ReservationRequest request,ModelMap modelMap) {
-    	Reservation reservation = reservationService.bookFlight(request);
-    	modelMap.addAttribute("msg", "Reservation created successfully and the id "+ reservation.getId());
-    	return "reservationConfirmation";
-    }
+	@GetMapping("/showCompleteReservation")
+	public String showCompleteReservation(@RequestParam("flightId") Long flightId, ModelMap modelMap) {
+		LOGGER.info("Inside showCompleteReservation() invoked with FlightId : ", flightId);
 
+		Optional<Flight> flight = flightRepository.findById(flightId);
+		modelMap.addAttribute("flight", flight);
+		LOGGER.info("Flight is : ", flight);
+
+		return "completeReservation";
+	}
+
+	@PostMapping(value = "/completeReservation")
+	public String completeReservation(ReservationRequest request, ModelMap modelMap) {
+
+		LOGGER.info("Inside completeReservation() is : " + request);
+
+		Reservation reservation = reservationService.bookFlight(request);
+		modelMap.addAttribute("msg", "Reservation created successfully and the id " + reservation.getId());
+		return "reservationConfirmation";
+	}
 
 }

@@ -7,26 +7,26 @@ import java.util.Date;
 
 @Entity
 public class Flight extends AbstractEntity {
-	
+
 	@Column(name = "flight_number")
-    private String flightNumber;
+	private String flightNumber;
 
-    @Column(name = "operating_airlines")
-    private String operatingAirlines;
+	@Column(name = "operating_airlines")
+	private String operatingAirlines;
 
-    @Column(name = "departure_city")
-    private String departureCity;
+	@Column(name = "departure_city")
+	private String departureCity;
 
-    @Column(name = "arrival_city")
-    private String arrivalCity;
-    
-    @Column(name = "date_of_departure")
-    private String dateOfDeparture;
+	@Column(name = "arrival_city")
+	private String arrivalCity;
 
-    @Column(name = "estimated_departure_time")
-    private String estimatedDepartureTime; 
+	@Column(name = "date_of_departure")
+	private String dateOfDeparture;
 
-    public String getDateOfDeparture() {
+	@Column(name = "estimated_departure_time")
+	private String estimatedDepartureTime;
+
+	public String getDateOfDeparture() {
 		return dateOfDeparture;
 	}
 
@@ -42,41 +42,37 @@ public class Flight extends AbstractEntity {
 		this.estimatedDepartureTime = estimatedDepartureTime;
 	}
 
+	public String getFlightNumber() {
+		return flightNumber;
+	}
 
-	
+	public void setFlightNumber(String flightNumber) {
+		this.flightNumber = flightNumber;
+	}
 
-    public String getFlightNumber() {
-        return flightNumber;
-    }
+	public String getOperatingAirlines() {
+		return operatingAirlines;
+	}
 
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-    }
+	public void setOperatingAirlines(String operatingAirlines) {
+		this.operatingAirlines = operatingAirlines;
+	}
 
-    public String getOperatingAirlines() {
-        return operatingAirlines;
-    }
+	public String getDepartureCity() {
+		return departureCity;
+	}
 
-    public void setOperatingAirlines(String operatingAirlines) {
-        this.operatingAirlines = operatingAirlines;
-    }
+	public void setDepartureCity(String departureCity) {
+		this.departureCity = departureCity;
+	}
 
-    public String getDepartureCity() {
-        return departureCity;
-    }
+	public String getArrivalCity() {
+		return arrivalCity;
+	}
 
-    public void setDepartureCity(String departureCity) {
-        this.departureCity = departureCity;
-    }
-
-    public String getArrivalCity() {
-        return arrivalCity;
-    }
-
-    public void setArrivalCity(String arrivalCity) {
-        this.arrivalCity = arrivalCity;
-    }
-
+	public void setArrivalCity(String arrivalCity) {
+		this.arrivalCity = arrivalCity;
+	}
 
 	@Override
 	public String toString() {
@@ -84,7 +80,5 @@ public class Flight extends AbstractEntity {
 				+ departureCity + ", arrivalCity=" + arrivalCity + ", dateOfDeparture=" + dateOfDeparture
 				+ ", estimatedDepartureTime=" + estimatedDepartureTime + "]";
 	}
-    
-    
 
 }
