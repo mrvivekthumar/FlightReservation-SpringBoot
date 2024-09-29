@@ -32,4 +32,9 @@ public class FlightController {
 		return "viewFlights";
 	}
 
+	@GetMapping("/admin/showAddFlight")
+	public String showAddFlight() {
+		return "addFlight";
+	}
+
 }

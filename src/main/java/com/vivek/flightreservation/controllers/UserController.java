@@ -1,11 +1,13 @@
 package com.vivek.flightreservation.controllers;
 
+import com.itextpdf.text.pdf.qrcode.Encoder;
 import com.vivek.flightreservation.entities.User;
 import com.vivek.flightreservation.repos.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,9 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 	@GetMapping("/register")
@@ -30,6 +35,7 @@ public class UserController {
 	@PostMapping("/register")
 	public String registerUser(@ModelAttribute("user") User user) {
 		LOGGER.info("Inside registerUser() : " + user);
+		user.setPassword(encoder.encode(user.getPassword()));
 		userRepository.save(user);
 		return "login";
 	}
