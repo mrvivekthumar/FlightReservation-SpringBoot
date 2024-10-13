@@ -1,8 +1,8 @@
 package com.vivek.flightreservation.controllers;
 
-import com.itextpdf.text.pdf.qrcode.Encoder;
 import com.vivek.flightreservation.entities.User;
 import com.vivek.flightreservation.repos.UserRepository;
+import com.vivek.flightreservation.services.SecurityService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +22,9 @@ public class UserController {
 	private UserRepository userRepository;
 
 	@Autowired
+	private SecurityService securityService;
+
+	@Autowired
 	private BCryptPasswordEncoder encoder;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -37,20 +40,22 @@ public class UserController {
 		LOGGER.info("Inside registerUser() : " + user);
 		user.setPassword(encoder.encode(user.getPassword()));
 		userRepository.save(user);
-		return "login";
+		return "redirect:/login";
 	}
 
 	@PostMapping("/login")
 	public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password,
 			ModelMap modelMap) {
-		LOGGER.info("Inside loginUser() and Email is :" + email);
-		User user = userRepository.findByEmail(email);
 
-		if (user != null && user.getPassword().equals(password)) {
-			return "findFlights";
+		boolean loginResponse = securityService.login(email, password);
+
+		LOGGER.info("Inside loginUser() and Email is :" + email);
+
+		if (loginResponse) {
+			return "redirect:/findFlights";
 		} else {
 			modelMap.addAttribute("msg", "Invalid username or password. Please try again.");
+			return "login";
 		}
-		return "login";
 	}
 }
