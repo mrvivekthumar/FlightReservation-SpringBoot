@@ -1,5 +1,6 @@
 package com.vivek.flightreservation.controllers;
 
+import com.vivek.flightreservation.services.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.vivek.flightreservation.entities.User;
 import com.vivek.flightreservation.repos.UserRepository;
 //import com.vivek.flightreservation.services.SecurityService;
-import com.vivek.flightreservation.services.SecurityService;
+//import com.vivek.flightreservation.services.SecurityService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,9 +45,14 @@ public class UserController {
 	public String registerUser(@ModelAttribute("user") User user) {
 		LOGGER.info("Inside registerUser() : " + user);
 		user.setPassword(encoder.encode(user.getPassword()));
-		user.setPassword(encoder.encode(user.getPassword()));
 		userRepository.save(user);
-		return "redirect:/login";
+		return "login";
+	}
+
+	@GetMapping("/login")
+	public String loginForm() {
+		LOGGER.info("Inside loginForm()");
+		return "login";
 	}
 
 	@PostMapping("/findFlights")
@@ -59,7 +65,6 @@ public class UserController {
 		} else {
 			modelMap.addAttribute("msg", "Invalid user name or password .Please try again.");
 		}
-
 		return "login";
 
 	}

@@ -5,5 +5,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public interface SecurityService {
 
-	boolean login(String username, String password, HttpServletRequest request, HttpServletResponse response);
+    boolean login(String username,String password,HttpServletRequest request,HttpServletResponse response);
+
 }
