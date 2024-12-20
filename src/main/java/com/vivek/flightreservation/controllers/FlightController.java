@@ -1,7 +1,6 @@
 package com.vivek.flightreservation.controllers;
 
-import com.vivek.flightreservation.entities.Flight;
-import com.vivek.flightreservation.repos.FlightRepository;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import com.vivek.flightreservation.entities.Flight;
+import com.vivek.flightreservation.repos.FlightRepository;
 
 @Controller
 public class FlightController {
@@ -30,6 +30,11 @@ public class FlightController {
 		modelMap.addAttribute("flights", flights);
 		System.out.println("hii2");
 		return "viewFlights";
+	}
+
+	@GetMapping("/admin/showAddFlight")
+	public String showAddFlight() {
+		return "addFlight";
 	}
 
 }

@@ -9,13 +9,13 @@
 <body>
 	<h2>Login :</h2>
 
-	<form action="login" method="post">
+	<form action="findFlights" method="post">
 		<pre>
 Email : <input type="text" name="email" />
 
 Password : <input type="password" name="password" />
 
-<input type="submit" name="login" />
+<input type="submit" value="login" />
 
 </pre>
 

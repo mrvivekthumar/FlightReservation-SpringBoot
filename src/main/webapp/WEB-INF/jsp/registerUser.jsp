@@ -7,7 +7,7 @@
     <title>Register User</title>
 </head>
 <body>
-<form action="register" method="post">
+<form action="loginUser" method="post">
     <h2>User Registration</h2>
     <pre>
 		First Name : <input type="text" name="firstname"/>
@@ -20,7 +20,7 @@
 		
 		Confirm Password : <input type="password" name="confirmPassword"/>
 		
-		<input type="submit" name="register"/>
+		<input type="submit" value="register"/>
 </pre>
 
 </form>

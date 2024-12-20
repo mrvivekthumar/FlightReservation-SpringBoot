@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration>
-	<property name = "LOG_DIR" value = "/Users/thuma/Documents/Logs" />
+	<property name = "LOG_DIR" value = "/Users/thuma/Music/Logs"/>
 	<property name = "FILE_PREFIX" value = "flightreservation" />
 
 	<appender name ="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
