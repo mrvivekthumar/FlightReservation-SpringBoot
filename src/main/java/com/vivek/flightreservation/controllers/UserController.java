@@ -44,8 +44,9 @@ public class UserController {
 	public String registerUser(@ModelAttribute("user") User user) {
 		LOGGER.info("Inside registerUser() : " + user);
 		user.setPassword(encoder.encode(user.getPassword()));
+		user.setPassword(encoder.encode(user.getPassword()));
 		userRepository.save(user);
-		return "login";
+		return "redirect:/login";
 	}
 
 	@PostMapping("/findFlights")
