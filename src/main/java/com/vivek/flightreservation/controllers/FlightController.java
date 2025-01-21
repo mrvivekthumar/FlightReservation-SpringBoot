@@ -22,7 +22,7 @@ public class FlightController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FlightController.class);
 
-	@PostMapping("/v1")
+	@PostMapping("/viewFlights")
 	public String findFlights(@RequestParam("from") String from, @RequestParam("to") String to,
 			@RequestParam("departureDate") String departureDate, ModelMap modelMap) {
 		LOGGER.info("Inside findFlights() From : " + from + " To : " + to + " Departure date : " + departureDate);

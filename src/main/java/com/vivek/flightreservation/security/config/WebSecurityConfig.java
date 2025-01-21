@@ -21,42 +21,39 @@ import org.springframework.security.web.context.SecurityContextRepository;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-    @Bean
-    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(userDetailsService)
-                .passwordEncoder(bcryptPasswordEncoder());
-        return authenticationManagerBuilder.build();
-    }
+	@Bean
+	public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+		AuthenticationManagerBuilder authenticationManagerBuilder = http
+				.getSharedObject(AuthenticationManagerBuilder.class);
+		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(bcryptPasswordEncoder());
+		return authenticationManagerBuilder.build();
+	}
 
-    @Bean
-    public BCryptPasswordEncoder bcryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public BCryptPasswordEncoder bcryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Bean
-    public SecurityContextRepository securityContextRepo() {
-        return new HttpSessionSecurityContextRepository();
-    }
+	@Bean
+	public SecurityContextRepository securityContextRepo() {
+		return new HttpSessionSecurityContextRepository();
+	}
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests(authorizeRequests ->
-                        authorizeRequests
-                                .requestMatchers("/admin/showAddFlight").hasRole("ADMIN")
-                                .requestMatchers("/viewFlights", "/showCompleteReservation*",
-                                        "/completeReservation", "/reservationConfirmation", "/login?continue")
-                                .authenticated()  // Requires authentication
-                                .requestMatchers("/register", "/registerUser", "/findFlights","/login", "/", "/reservations/*")
-                                .permitAll()  // Allow registration and login pages for all
-                )
-                .csrf(csrf -> csrf.disable())
-                .securityContext(securityContext -> securityContext.requireExplicitSave(true));
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.authorizeRequests(
+				authorizeRequests -> authorizeRequests.requestMatchers("/admin/showAddFlight").hasRole("ADMIN")
+						.requestMatchers("/viewFlights", "/showCompleteReservation*", "/completeReservation",
+								"/reservationConfirmation", "/login?continue")
+						.authenticated() // Requires authentication
+						.requestMatchers("/register", "/registerUser", "/findFlights", "/login", "/", "/reservations/*",
+								"/reservations")
+						.permitAll() // Allow registration and login pages for all
+		).csrf(csrf -> csrf.disable()).securityContext(securityContext -> securityContext.requireExplicitSave(true));
 
-        return http.build();
-    }
+		return http.build();
+	}
 }

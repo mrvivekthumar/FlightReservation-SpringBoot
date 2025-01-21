@@ -39,7 +39,7 @@ public class ReservationController {
 		return "completeReservation";
 	}
 
-	@PostMapping(value = "/completeReservation")
+	@PostMapping("/completeReservation")
 	public String completeReservation(ReservationRequest request, ModelMap modelMap) {
 
 		LOGGER.info("Inside completeReservation() is : " + request);

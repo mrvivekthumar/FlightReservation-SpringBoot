@@ -9,7 +9,7 @@
 
 <h2>Find Flights</h2>
 <body>
-	<form action="findFlights" method="post">
+	<form action="viewFlights" method="post">
 		<pre>
 From : <input type="text" name="from" />
 

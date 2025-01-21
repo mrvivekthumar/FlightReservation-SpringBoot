@@ -1,7 +1,5 @@
 package com.vivek.flightreservation.entities;
 
-import java.sql.Timestamp;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 
@@ -18,13 +16,25 @@ public class Reservation extends AbstractEntity {
 	@OneToOne
 	private Flight flight;
 
-	private Timestamp created;
+	private String created;
 
 	public Boolean getCheckedIn() {
 		return checkedIn;
 	}
 
 	public void setCheckedIn(Boolean checkedIn) {
+		this.checkedIn = checkedIn;
+	}
+
+	public String getCreated() {
+		return created;
+	}
+
+	public void setCreated(String created) {
+		this.created = created;
+	}
+
+	public void setCheckedIn(boolean checkedIn) {
 		this.checkedIn = checkedIn;
 	}
 
@@ -50,14 +60,6 @@ public class Reservation extends AbstractEntity {
 
 	public void setFlight(Flight flight) {
 		this.flight = flight;
-	}
-
-	public Timestamp getCreated() {
-		return created;
-	}
-
-	public void setCreated(Timestamp created) {
-		this.created = created;
 	}
 
 	@Override
