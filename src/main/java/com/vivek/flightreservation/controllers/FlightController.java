@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.vivek.flightreservation.constants.ApplicationConstants;
 import com.vivek.flightreservation.entities.Flight;
 import com.vivek.flightreservation.repos.FlightRepository;
 
@@ -22,14 +23,21 @@ public class FlightController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FlightController.class);
 
-	@PostMapping("/viewFlights")
+	@GetMapping("/findFlights")
+	public String findFlights() {
+		return ApplicationConstants.FIND_FLIGHTS_VIEW;
+	}
+
+
+
+	@PostMapping("/findFlights")
 	public String findFlights(@RequestParam("from") String from, @RequestParam("to") String to,
 			@RequestParam("departureDate") String departureDate, ModelMap modelMap) {
 		LOGGER.info("Inside findFlights() From : " + from + " To : " + to + " Departure date : " + departureDate);
 		List<Flight> flights = flightRepository.findFlights(from, to, departureDate);
 		modelMap.addAttribute("flights", flights);
 		System.out.println("hii2");
-		return "viewFlights";
+		return ApplicationConstants.VIEW_FLIGHTS_VIEW;
 	}
 
 	@GetMapping("/admin/showAddFlight")

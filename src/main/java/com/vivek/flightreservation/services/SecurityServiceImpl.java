@@ -2,6 +2,7 @@ package com.vivek.flightreservation.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +25,8 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Autowired
 	SecurityContextRepository securityContextRepo;
+
+	ProviderManager providerManager;
 
 	@Override
 	public boolean login(String username, String password, HttpServletRequest request, HttpServletResponse response) {

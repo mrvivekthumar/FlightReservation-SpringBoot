@@ -1,0 +1,91 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="/flightreservation/">
+            <i class="fas fa-plane-departure"></i>
+            <span>Flight Reservation</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <%
+                String user = (String) session.getAttribute("user");
+                if (user == null) {
+                %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/flightreservation/login">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Login</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/flightreservation/register">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Register</span>
+                        </a>
+                    </li>
+                <%
+                } else {
+                %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/flightreservation/findFlights">
+                            <i class="fas fa-search"></i>
+                            <span>Find Flights</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/flightreservation/logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link text-light">
+                            <i class="fas fa-user"></i>
+                            <span>Welcome, <%= user %></span>
+                        </span>
+                    </li>
+                <%
+                }
+                %>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/flightreservation">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <%
+            if (user != null) {
+            %>
+                <li class="breadcrumb-item">
+                    <a href="/flightreservation/findFlights">
+                        <i class="fas fa-search"></i>
+                        <span>Find Flights</span>
+                    </a>
+                </li>
+            <%
+            }
+            String flightId = request.getParameter("flightId");
+            if (flightId != null && !flightId.isEmpty()) {
+            %>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Complete Reservation</span>
+                </li>
+            <%
+            }
+            %>
+        </ol>
+    </nav>
+</div> 

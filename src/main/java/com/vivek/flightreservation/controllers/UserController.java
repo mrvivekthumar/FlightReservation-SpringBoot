@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vivek.flightreservation.entities.User;
 import com.vivek.flightreservation.repos.UserRepository;
-//import com.vivek.flightreservation.services.SecurityService;
-//import com.vivek.flightreservation.services.SecurityService;
+import com.vivek.flightreservation.constants.ApplicationConstants;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,37 +33,58 @@ public class UserController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
+	@GetMapping("/flightreservation")
+	public String showHome() {
+		return "index";
+	}
+
 	@GetMapping("/register")
 	public String registerForm() {
 		LOGGER.info("Inside registerForm()");
-		return "registerUser";
-	}
-
-	@PostMapping("/loginUser")
-	public String registerUser(@ModelAttribute("user") User user) {
-		LOGGER.info("Inside registerUser() : " + user);
-		user.setPassword(encoder.encode(user.getPassword()));
-		userRepository.save(user);
-		return "login";
+		return ApplicationConstants.REGISTER_VIEW;
 	}
 
 	@GetMapping("/login")
 	public String loginForm() {
 		LOGGER.info("Inside loginForm()");
-		return "login";
+		return ApplicationConstants.LOGIN_VIEW;
 	}
 
-	@PostMapping("/findFlights")
+	@PostMapping("/register")
+	public String registerUser(@ModelAttribute("user") User user, ModelMap modelMap) {
+		LOGGER.info("Inside registerUser() : " + user);
+
+		// Check if user already exists
+		User existingUser = userRepository.findByEmail(user.getEmail());
+		if (existingUser != null) {
+			modelMap.addAttribute("msg", "User with this email already exists. Please login instead.");
+			return ApplicationConstants.LOGIN_VIEW;
+		}
+
+		user.setPassword(encoder.encode(user.getPassword()));
+		userRepository.save(user);
+		modelMap.addAttribute("msg", ApplicationConstants.REGISTRATION_SUCCESS);
+		return ApplicationConstants.LOGIN_VIEW;
+	}
+
+	@PostMapping("/login")
 	public String login(@RequestParam("email") String email, @RequestParam("password") String password,
 			ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
-		boolean loginResponse = securityService.login(email, password, request, response);
 		LOGGER.info("Inside login() and the email is: " + email);
-		if (loginResponse) {
-			return "findFlights";
-		} else {
-			modelMap.addAttribute("msg", "Invalid user name or password .Please try again.");
-		}
-		return "login";
 
+		// Check if user exists
+		User user = userRepository.findByEmail(email);
+		if (user == null) {
+			modelMap.addAttribute("msg", ApplicationConstants.USER_NOT_FOUND);
+			return ApplicationConstants.LOGIN_VIEW;
+		}
+
+		boolean loginResponse = securityService.login(email, password, request, response);
+		if (loginResponse) {
+			return ApplicationConstants.FIND_FLIGHTS_VIEW;
+		} else {
+			modelMap.addAttribute("msg", ApplicationConstants.INVALID_CREDENTIALS);
+		}
+		return ApplicationConstants.FIND_FLIGHTS_VIEW;
 	}
 }
